@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <title>New Tab</title>
+    <!-- External Style -->
+    <!--link rel="stylesheet" href="/skin/external/normalize.css" type="text/css"/-->
+    <!-- Newtab Styles -->
+    <!--link rel="stylesheet" href="/skin/css/newtab.css"/-->
+    <link rel="stylesheet" href="/skin/css/search2.css">
+    <link rel="stylesheet" type="text/css" href="/skin/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/skin/css/white_bg.css">
+    <!-- External Scripts -->
+    <script type="text/javascript" src="/content/external/underscore-min.js"></script>
+    <script type="text/javascript" src="/content/external/string.min.js"></script>
+    <script type="text/javascript" src="/content/external/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/content/external/progressbar.js"></script>
+
+
+    <script data-source="internal" type="text/javascript" src="/content/search/search-engines.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/chrome/settings.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/common/prefs-sys.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/common/prefs.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/common/conf-sys.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/common/conf.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/common/settings-dev.js"></script>
+    <!-- initialize utils and common-->
+    <script data-source="internal" type="text/javascript" src="/content/chrome/utils.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/chrome/common.js"></script>
+    <!-- New Tab base -->
+    <script data-source="internal" type="text/javascript" src="/content/search/AutoSuggest.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/search/newtab-base.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/common/abtest.js"></script>
+    <script data-source="internal" type="text/javascript" src="/content/search/search-form.js"></script>
+
+</head>
+<body>
+<nav id="cat_nav">
+    <a class='selected_cat' href="#">Web</a>
+    <a href="#">Images</a>
+    <a href="#">Videos</a>
+</nav>
+
+<div class="widght">
+    <div class="toggle">
+        <a href="#" id="background_selector"><img src="../skin/images/brush.png"></a>
+        <a href="#" id="weather" class="clock"><img src="../skin/images/cloud.png"></a>
+    </div>
+    <div class="time">
+        <h1 class="hour">
+            15:30
+        </h1>
+        <div class="date">
+            <p class="day">Sunday</p>
+            <p class="num">14.10.2015</p>
+        </div>
+    </div>
+    <div class="weather">
+        <h1><span class="val"></span><em class="deg">&deg;</em><span id="weather_widget_unit" class="units">C</span>
+        </h1>
+        <div class="fright">
+            <div class="icon"><img src="" alt=""></div>
+            <div class="city"></div>
+        </div>
+    </div>
+</div>
+<div id="search-box-wrapper">
+
+    <div id="search-box">
+        <dl id="main" class="dropdown">
+            <div id="search-engine-select">
+                <!--<div id="search-engine-item-icon"></div>-->
+                <div id="search-engine-item-title"></div>
+                <div id="search-engine-arrow"></div>
+            </div>
+            <ul id="search-engine-list" data-state="close" style="display: none;"></ul>
+        </dl>
+        <input id="search-input" dir="auto" type="search" autofocus="autofocus" tabindex="1"/>
+        <div type="button" id="search-button" value="Search" class="searchBtn">Search</div>
+    </div>
+</div>
+<ul id="search-suggestion-pad"></ul>
+<div id="background_selector_widget">
+    <h3>Choose background:</h3>
+    <ul>
+        <li><img data-src="sea-bg.jpg" src="/skin/images/sea-bg.jpg"></li>
+        <li><img data-src="mountain-bg.jpg" src="/skin/images/mountain-bg.jpg"></li>
+        <li><img data-src="desk-bg.jpg" src="/skin/images/desk-bg.jpg"></li>
+        <li><img data-src="cupcake-bg.jpg" src="/skin/images/cupcake-bg.jpg"></li>
+        <li><img data-src="bluesky-bg.jpg" src="/skin/images/bluesky-bg.jpg"></li>
+    </ul>
+
+    <div class="color">
+        <!-- h3>More colors...</h3>
+        <input type="color" id="color_picker" name="color_picker" value="#ff0000" width="70" -->
+        <ul id="colors_selector">
+        </ul>
+    </div>
+    <div class="bgFooter">
+        <input type="button" value="Done" id="close_background_selector_widget"/>
+    </div>
+
+</div>
+<footer>
+    <a id="lnk_eula" href="http://searchmgr.com/eula.html" target="_blank">EULA</a>
+    <a id="lnk_pp" href="http://searchmgr.com/pp.html" target="_blank">Privacy Policy</a>
+    <a id="lnk_support">Support</a>
+
+    <div id="support_menu">
+        <div><a id="lnk_faq" href="http://searchmgr.com/faq.html" target="_blank">FAQ</a></div>
+        <hr>
+        <div><a id="uninstallSelf">Uninstall</a></div>
+    </div>
+</footer>
+<div id="overlay"></div>
+<div id="arrow_dialog" class="wrapper">
+    <img src="/skin/images/just-the-box.png">
+</div>
+<div id="overlay_progress_popup" class="wrapper">
+    <img src="/skin/icons/48.png">
+    <header>
+        <div class="wrapper">
+            <h1>Search Manager</h1>
+        </div>
+    </header>
+    <section>
+        <div id="progressBar"></div>
+    </section>
+</div>
+<div id="overlay_popup"><a href="#" class="x-button"></a>
+    <img src="/skin/icons/48.png">
+    <header>
+        <div class="wrapper">
+            <h1>Search Manager</h1>
+        </div>
+    </header>
+    <section>
+        <div class="wrapper">
+            <p id="tx_nt">Customize your newtab experience by choosing your favorite background color and image and get
+                your local weather at anytime </p>
+            <p id="tx_ds">This is your first search... use search manager to easily select your preferred search
+                provider anytime, from Google, Yahoo and Bing </p>
+            <div class="buttons" id="bt1">
+                <div class="btn">Configure</div>
+            </div>
+            <div class="buttons" id="bt2">
+                <div class="btn">Later</div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
+
+
